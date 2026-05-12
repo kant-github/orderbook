@@ -1,12 +1,11 @@
 {
   "name": "ws",
-  "module": "index.ts",
-  "type": "module",
   "private": true,
+  "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
+    "@repo/typescript-config": "*",
+    "@repo/types": "*",
+    "@types/bun": "latest",
     "typescript": "^5"
   }
 }

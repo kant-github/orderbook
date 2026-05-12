@@ -1,12 +1,13 @@
 {
-  "name": "types",
-  "module": "index.ts",
-  "type": "module",
+  "name": "@repo/types",
+  "version": "0.0.0",
   "private": true,
-  "devDependencies": {
-    "@types/bun": "latest"
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
   },
-  "peerDependencies": {
+  "devDependencies": {
+    "@repo/typescript-config": "*",
     "typescript": "^5"
   }
 }
