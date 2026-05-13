@@ -11,9 +11,36 @@ generator client {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  image         String?
-  emailVerified DateTime?
+  id             String    @id @default(cuid())
+  name           String?
+  email          String?   @unique
+  image          String?
+  email_verified DateTime?
+}
+
+model Asset {
+  symbol         String   @id
+  decimals       Int
+  created_at     DateTime @default(now()) @map("created_at")
+  marketsAsBase  Market[] @relation("BaseAsset")
+  marketsAsQuote Market[] @relation("QuoteAsset")
+
+  @@map("assets")
+}
+
+model Market {
+  id String @id @default(cuid())
+
+  base       String
+  quote      String
+  baseAsset  Asset  @relation("BaseAsset", fields: [base], references: [symbol])
+  quoteAsset Asset  @relation("QuoteAsset", fields: [quote], references: [symbol])
+
+  @@map("markets")
+}
+
+enum MarketStatus {
+  ACTIVE
+  INACTIVE
+  DELISTED
 }

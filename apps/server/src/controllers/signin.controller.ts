@@ -1,8 +1,17 @@
 import type { Request, Response } from "express";
-import z, { email } from "zod";
+import z from "zod";
+import jwt from "jsonwebtoken";
 import ResponseWriter from "../class/response_writer";
 import chalk from "chalk";
 import { prisma } from "@repo/database"
+import { ENV } from "../config/env.config";
+
+export interface UserType {
+    id?: string | null;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+}
 
 export default class UserRegistrationController {
 
@@ -26,8 +35,15 @@ export default class UserRegistrationController {
                 update: { name: parsed_data.data.name, image: parsed_data.data.image },
                 create: parsed_data.data,
             });
+            const token_object: UserType = {
+                id: new_user.id,
+                name: new_user.name,
+                email: new_user.email,
+                image: new_user.image,
+            }
+            const token = jwt.sign(token_object, ENV.SERVER_JWT_SECRET, { expiresIn: "1h" });
 
-            ResponseWriter.success(res, { user: new_user }, "Login successful");
+            ResponseWriter.success(res, { user: new_user, token }, "Login successful");
 
         } catch (err) {
             console.error(chalk.red("Error in process_login:"), err);

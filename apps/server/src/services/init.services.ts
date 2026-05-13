@@ -11,7 +11,7 @@ export default class ApiService {
         this.redis_cache = new RedisService();
     }
 
-    public async log_api_boot() {
+    public async log_server_boot() {
         const url = `http://localhost:${ENV.SERVER_PORT}`;
         const started_at = new Date().toLocaleTimeString();
 

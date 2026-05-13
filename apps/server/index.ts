@@ -14,5 +14,5 @@ app.use(express.json());
 app.use("/api/v1/users", user_router);
 
 app.listen(ENV.SERVER_PORT, () => {
-    services.log_api_boot();
+    services.log_server_boot();
 });

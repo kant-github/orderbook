@@ -34,16 +34,12 @@ export const authOption: AuthOptions = {
                     });
 
                     const result = response.data;
-
+                    console.log("Login response from server:", result);
                     if (result?.success) {
                         user.id = result.data.user.id.toString();
                         user.token = result.data.token;
                         return true;
                     }
-                }
-
-                if (account?.provider === 'email-otp') {
-                    return !!user;
                 }
 
                 return false;
