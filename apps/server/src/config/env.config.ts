@@ -7,8 +7,9 @@ const env_schema = z.object({
     SERVER_REDIS_HOST: z.string().default('localhost'),
     SERVER_REDIS_PORT: z.coerce.number().min(1).max(65535).default(6379),
     SERVER_REDIS_PASSWORD: z.string().optional(),
-    DATABASE_URL: z.string(),
     SERVER_JWT_SECRET: z.string().min(10),
+    SERVER_KAFKA_BROKERS: z.string().default('localhost:9092'),
+    DATABASE_URL: z.string(),
 });
 
 export let ENV: z.infer<typeof env_schema>;

@@ -1,14 +1,20 @@
 import chalk from "chalk";
-import RedisService from "./cache.services";
 import { ENV } from "../config/env.config";
+import KafkaService from "./kafka.services";
 
 export default class ApiService {
-    public redis_cache!: RedisService;
+    public kafka_service: KafkaService;
 
-    constructor() { }
+    constructor() {
+        this.kafka_service = new KafkaService();
+    }
 
-    public init_sub_services() {
-        this.redis_cache = new RedisService();
+    public async start() {
+        await this.kafka_service.connect();
+    }
+
+    public async shutdown() {
+        await this.kafka_service.disconnect();
     }
 
     public async log_server_boot() {

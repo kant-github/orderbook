@@ -6,13 +6,23 @@ import { ENV, parse_env } from "./src/config/env.config";
 parse_env();
 
 export const services = new ApiService();
-services.init_sub_services();
-
 const app = express();
 
 app.use(express.json());
 app.use("/api/v1/users", user_router);
 
-app.listen(ENV.SERVER_PORT, () => {
+await services.start();
+
+const server = app.listen(ENV.SERVER_PORT, () => {
     services.log_server_boot();
 });
+
+const shutdown = () => {
+    server.close(async () => {
+        await services.shutdown();
+        process.exit(0);
+    });
+};
+
+process.on("SIGTERM", shutdown);
+process.on("SIGINT", shutdown);

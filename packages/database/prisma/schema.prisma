@@ -30,7 +30,6 @@ model Asset {
 
 model Market {
   id String @id @default(cuid())
-
   base       String
   quote      String
   baseAsset  Asset  @relation("BaseAsset", fields: [base], references: [symbol])
