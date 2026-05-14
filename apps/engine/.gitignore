@@ -1,0 +1,17 @@
+# Rust build artifacts
+target/
+
+# rustfmt backups
+**/*.rs.bk
+
+# Debug symbols
+*.pdb
+
+# Profiling / coverage output
+perf.data*
+flamegraph.svg
+*.profraw
+
+# IDE
+.idea/
+*.iml
