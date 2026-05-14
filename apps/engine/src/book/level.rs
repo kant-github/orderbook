@@ -1,6 +1,5 @@
-use std::collections::VecDeque;
-
 use crate::types::{Order, Price};
+use std::collections::VecDeque;
 
 #[derive(Debug, Default)]
 pub struct PriceLevel {
