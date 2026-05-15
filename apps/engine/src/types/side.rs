@@ -5,7 +5,7 @@ pub enum Side {
 }
 
 impl Side {
-    fn opposite(&self) -> Self {
+    pub fn opposite(self) -> Self {
         match self {
             Side::Ask => Side::Bid,
             Side::Bid => Side::Ask,

@@ -4,5 +4,6 @@ mod book;
 mod types;
 
 fn main() {
-    let _book = OrderBook::new();
+    let book = OrderBook::new();
+    println!("orderbook is : {:?}", book);
 }

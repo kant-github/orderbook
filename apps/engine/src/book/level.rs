@@ -1,4 +1,4 @@
-use crate::types::{Order, Price};
+use crate::types::Order;
 use std::collections::VecDeque;
 
 #[derive(Debug, Default)]
